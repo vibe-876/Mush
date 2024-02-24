@@ -7,14 +7,14 @@
 
 
 /* In future, add some arguments (e.g: -r for
-   non-interactive mode or something */
+   non-interactive mode or something). */
 int main(int argc, char *argv[])
 {
     mushLoop();
     return(0);
 }
 
-/* mushLoop ends when only "exit" is typed */
+/* mushLoop ends when only "exit" is typed. */
 int mushLoop()
 {
     char *rawCmd = malloc(RCMDSIZE);
@@ -25,11 +25,10 @@ int mushLoop()
 	mushFormat(rawCmd, cmd);
     } while(strcmp(rawCmd, "exit\n"));
 
-    free(rawCmd);
     return(0);
 }
 
-/* Creates a 2d list of the command */
+/* Creates a 2d list of the command. */
 int mushFormat(char *raw, char **cmd)
 {
     int i = 0;
@@ -48,8 +47,12 @@ int mushFormat(char *raw, char **cmd)
 
 	default:
 	    cmd[col][row++] = raw[i++];
-	} cmd[col][row] = '\0';
+	}
     }
 
+    cmd[col][row] = '\0';
+    cmd[++col] = malloc(1);
+    cmd[col][0] = '\0';
+    
     return(0);
 }
