@@ -1,2 +1,2 @@
 # Mush
-Writing another shell (for fun).
+Writing a shell (for fun).
