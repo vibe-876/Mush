@@ -56,3 +56,16 @@ int mushFormat(char *raw, char **cmd)
     
     return(0);
 }
+
+/* Deallocates the buffers used to store the commands. */
+void mushFree(char *raw, char **cmd)
+{
+    int i = 0;
+    
+    do {
+	free(cmd[i++]);
+    } while(cmd[i][0] != '\0');
+    
+    free(cmd);
+    free(raw);
+}
