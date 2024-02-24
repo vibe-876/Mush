@@ -5,4 +5,5 @@
 
 int mushLoop();
 int mushFormat(char *raw, char **cmd);
+int mushExec(char **cmd);
 void mushFree(char **cmd);
