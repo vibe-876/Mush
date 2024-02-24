@@ -24,5 +24,6 @@ install::
 clean::
 	rm -f $(SRC)/*.o mush
 
+## Install Clean. Deletes the mush binary from the path.
 iClean::
 	rm -f $(PATH)/mush
