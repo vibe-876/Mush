@@ -18,11 +18,15 @@ int main(int argc, char *argv[])
 int mushLoop()
 {
     char *rawCmd = malloc(RCMDSIZE);
-    char **cmd = malloc(RCMDSIZE / CMDSIZE);
+    char **cmd;
 
     do {
+	cmd = malloc(RCMDSIZE / CMDSIZE);
+	
 	fgets(rawCmd, RCMDSIZE, stdin);
 	mushFormat(rawCmd, cmd);
+
+	mushFree(cmd);
     } while(strcmp(rawCmd, "exit\n"));
 
     return(0);
@@ -57,8 +61,9 @@ int mushFormat(char *raw, char **cmd)
     return(0);
 }
 
-/* Deallocates the buffers used to store the commands. */
-void mushFree(char *raw, char **cmd)
+/* Deallocates the buffers used to store the
+   formatted commands. */
+void mushFree(char **cmd)
 {
     int i = 0;
     
@@ -67,5 +72,4 @@ void mushFree(char *raw, char **cmd)
     } while(cmd[i][0] != '\0');
     
     free(cmd);
-    free(raw);
 }
