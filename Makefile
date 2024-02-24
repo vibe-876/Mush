@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -O0
+CFLAGS=-g -O0 -Wall
 
 SRC=./src
 SRCS=$(SRC)/Mush.c $(SRC)/Mush.h
@@ -14,7 +14,7 @@ mush: $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 Mush.o: Mush.c
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 
 install::
