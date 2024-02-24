@@ -1,5 +1,5 @@
 # Mush
-The Mushroom User SHell (mush) is a shell that I am writing. It is intended as a part of an Operating System called "Mushroom". It will also run on Arch Linux, as that is what I am writing it (alongside the rust of Mushroom) on.
+The Mushroom User SHell (mush) is a shell that I am writing. It is intended as a part of an Operating System called "Mushroom". It should also run on Linux, but I'll only be testing it on Arch Linux, as that's what I run on my machine.
 
 This is probably the fifth time I've written mush, but I keep on deciding that I can re-write it cleaner.
 
