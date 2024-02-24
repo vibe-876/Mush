@@ -29,6 +29,7 @@ int mushLoop()
     return(0);
 }
 
+/* Creates a 2d list of the command */
 int mushFormat(char *raw, char **cmd)
 {
     int i = 0;
@@ -41,13 +42,11 @@ int mushFormat(char *raw, char **cmd)
 	switch(raw[i]) {
 	case ' ':
 	    cmd[col][row] = '\0';
-	    printf("%s\n\n\n", cmd[col]);
 	    row = 0;
 	    i++;
-	    cmd[col++] = malloc(CMDSIZE);
+	    cmd[++col] = malloc(CMDSIZE);
 
 	default:
-	    printf("row:\t%d\ncol:\t%d\ni:\t%d\n\n", row, col, i);
 	    cmd[col][row++] = raw[i++];
 	} cmd[col][row] = '\0';
     }
