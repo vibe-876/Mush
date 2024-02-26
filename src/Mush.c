@@ -60,7 +60,7 @@ int mushFormat(char *raw, char **cmd)
 
     cmd[col][row] = '\0';
     cmd[++col] = malloc(1);
-    cmd[col][0] = '\0';
+    cmd[col] = NULL;
     
     return(0);
 }
@@ -68,24 +68,11 @@ int mushFormat(char *raw, char **cmd)
 /* Executes the command */
 int mushExec(char **cmd)
 {
-    int i;
-    char *path = cmd[0];
-    char **args = malloc(0);
-	
-    for(i = 0; cmd[i + 1][0] != '\0'; i++) {
-	args = realloc(args, i + 1);
-	args[i] = cmd[i + 1];
-	printf("%d @ %p (%ld):\t%s\n", i, args, sizeof(args), args[i]);
-    }
-    
     if(fork() == 0) {
-	execvp(path, args);
+	execvp(cmd[0], cmd);
 	exit(0);
-    } else {
-	wait(NULL);
-    }
-
-    free(args);
+    } else wait(NULL);
+    
     return(0);
 }
 
@@ -97,7 +84,7 @@ void mushFree(char **cmd)
     
     do {
 	free(cmd[i++]);
-    } while(cmd[i][0] != '\0');
+    } while(cmd[i] != NULL);
     
     free(cmd);
 }
