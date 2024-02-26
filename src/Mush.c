@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 
 /* In future, add some arguments (e.g: -r for
@@ -68,24 +69,26 @@ int mushFormat(char *raw, char **cmd)
 int mushExec(char **cmd)
 {
     int i;
-    //    pid_t pid = fork();
+    pid_t child;
     char *path = cmd[0];
-    char **args = malloc(CMDSIZE);
+    char **args = malloc(0);
 	
-    for(i = 0; cmd[i][0] != '\0'; i++) {
+    for(i = 0; cmd[i + 1][0] != '\0'; i++) {
+	args = realloc(args, i + 1);
 	args[i] = cmd[i + 1];
+	printf("%d @ %p (%ld):\t%s\n", i, args, sizeof(args), args[i]);
     }
-
     
-    if(fork() == 0) {
+    if((child = fork()) == 0) {
 	execvp(path, args);
 	exit(0);
+    } else {
+	wait(NULL);
     }
 
     free(args);
     return(0);
 }
-
 
 /* Deallocates the buffers used to store the
    formatted commands. */
