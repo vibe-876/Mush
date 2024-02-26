@@ -69,7 +69,6 @@ int mushFormat(char *raw, char **cmd)
 int mushExec(char **cmd)
 {
     int i;
-    pid_t child;
     char *path = cmd[0];
     char **args = malloc(0);
 	
@@ -79,7 +78,7 @@ int mushExec(char **cmd)
 	printf("%d @ %p (%ld):\t%s\n", i, args, sizeof(args), args[i]);
     }
     
-    if((child = fork()) == 0) {
+    if(fork() == 0) {
 	execvp(path, args);
 	exit(0);
     } else {
